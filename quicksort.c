@@ -138,18 +138,19 @@ void *thread_func(void *params) {
 }
 
 int main() {
+    // Δεσμεύει θέση απ'τη μνήμη για τον πίνακα a
     double *a = (double*) malloc(sizeof(double) * SIZE);
     if (a == NULL) {
         printf("Error during memory allocation\n");
         exit(1);
     }
 
-    //Αρχικοποιήστε τον πίνακα με τιμές στο εύρος [0, 1]
+    //Αρχικοποιεί τον πίνακα με τιμές στο εύρος [0, 1]
     for (int i=0; i<SIZE; i++) {
         a[i] = (double) rand()/RAND_MAX;
     }
 
-    // δημιουργία ομάδας thread με παράμετρο τον πίνακα a
+    // δημιουργεί ομάδας thread με παράμετρο τον πίνακα a
     pthread_t threads[THREADS];
     for (int i=0; i<THREADS; i++){
         if (pthread_create(&threads[i], NULL, thread_func, a) != 0) {
